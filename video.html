@@ -67,19 +67,28 @@
             playButton.style.display = 'none'; // Esconde o botão
         }
 
+        // Função para pausar o vídeo
+        function pauseVideo() {
+            video.pause(); // Pausa o vídeo
+            playButton.style.display = 'block'; // Exibe o botão de play
+        }
+
         // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela
         document.body.addEventListener('click', () => {
             if (!hasStarted) {  // Verifica se o vídeo já foi iniciado
                 startVideo(); // Se não, inicia o vídeo do zero com som
                 hasStarted = true; // Marca que o vídeo foi iniciado
+            } else if (video.paused) {
+                startVideo(); // Se o vídeo estiver pausado, reinicia com som
+            } else {
+                pauseVideo(); // Se o vídeo estiver tocando, pausa
             }
         });
 
-        // Para pausar o vídeo, clicar novamente na tela
+        // Para pausar o vídeo, clicar no vídeo (se não estiver pausado)
         video.addEventListener('click', () => {
             if (!video.paused) {
-                video.pause(); // Pausa o vídeo
-                playButton.style.display = 'block'; // Exibe o botão de play
+                pauseVideo(); // Pausa o vídeo ao clicar no vídeo
             }
         });
     </script>
