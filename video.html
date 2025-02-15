@@ -57,6 +57,7 @@
     <script>
         const video = document.getElementById('videoPlayer');
         const playButton = document.getElementById('playButton');
+        let hasStarted = false; // Variável para controlar se o vídeo já foi iniciado
 
         // Função para iniciar o vídeo do zero e ativar o som
         function startVideo() {
@@ -66,12 +67,11 @@
             playButton.style.display = 'none'; // Esconde o botão
         }
 
-        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela (incluindo o botão)
-        document.body.addEventListener('click', (event) => {
-            if (event.target !== playButton) { // Ignora o clique no próprio botão
-                if (video.paused) {
-                    startVideo(); // Se o vídeo estiver pausado, reinicia do zero com som
-                }
+        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela
+        document.body.addEventListener('click', () => {
+            if (!hasStarted) {  // Verifica se o vídeo já foi iniciado
+                startVideo(); // Se não, inicia o vídeo do zero com som
+                hasStarted = true; // Marca que o vídeo foi iniciado
             }
         });
 
