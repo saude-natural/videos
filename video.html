@@ -26,43 +26,41 @@
             display: block;
         }
 
-        /* Esconde todos os controles do vídeo */
-        video[controls] {
-            display: block;
-        }
-
-        /* Esconde todos os controles extras do navegador */
-        video::-webkit-media-controls {
-            display: none !important;
-        }
-
-        /* Esconde os controles de volume e fullscreen */
-        video::-webkit-media-controls-volume-slider,
-        video::-webkit-media-controls-fullscreen-button,
-        video::-webkit-media-controls-play-button,
-        video::-webkit-media-controls-timeline,
-        video::-webkit-media-controls-current-time-display,
-        video::-webkit-media-controls-time-remaining-display {
-            display: none !important;
+        /* Botão de play no centro */
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="video-container">
-        <video id="videoPlayer" autoplay muted loop controls>
+        <video id="videoPlayer" muted loop>
             <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
+        <button id="playButton" class="play-button">&#9658;</button> <!-- Ícone de Play -->
     </div>
 
     <script>
         const video = document.getElementById('videoPlayer');
+        const playButton = document.getElementById('playButton');
 
-        // Espera o carregamento do vídeo e ativa o som após 0.1 segundos
-        video.addEventListener('play', () => {
-            setTimeout(() => {
-                video.muted = false; // Ativa o áudio
-            }, 100); // 0.1 segundos após o play
+        // Ao clicar no botão, o vídeo reinicia e o som é ativado
+        playButton.addEventListener('click', () => {
+            video.currentTime = 0; // Reinicia o vídeo
+            video.play(); // Começa a reprodução
+            video.muted = false; // Ativa o som
+            playButton.style.display = 'none'; // Esconde o botão de play
         });
     </script>
 </body>
