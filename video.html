@@ -18,6 +18,7 @@
             width: 406px;  /* Ajusta a largura do vídeo */
             height: 720px; /* Ajusta a altura do vídeo */
             background-color: white; /* Fundo do vídeo, caso não carregue */
+            display: none; /* Esconde o vídeo até que o play seja clicado */
         }
         
         /* Esconde todos os controles do vídeo */
@@ -25,37 +26,61 @@
             display: block;
             pointer-events: none; /* Desabilita interação */
         }
-        
-        /* Retira as funcionalidades de volume e fullscreen */
-        video::-webkit-media-controls-volume-slider {
-            display: none !important;
-        }
 
-        video::-webkit-media-controls-fullscreen-button {
-            display: none !important;
-        }
-
-        video::-webkit-media-controls-play-button {
-            display: none !important;
-        }
-
-        video::-webkit-media-controls-timeline {
-            display: none !important;
-        }
-
-        video::-webkit-media-controls-current-time-display {
-            display: none !important;
-        }
-
+        /* Esconde os controles do vídeo */
+        video::-webkit-media-controls-volume-slider,
+        video::-webkit-media-controls-fullscreen-button,
+        video::-webkit-media-controls-play-button,
+        video::-webkit-media-controls-timeline,
+        video::-webkit-media-controls-current-time-display,
         video::-webkit-media-controls-time-remaining-display {
             display: none !important;
+        }
+
+        /* Estilo do botão de play */
+        .play-button {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 30px;
+            padding: 20px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        /* Botão oculto após clicar no play */
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <video autoplay loop muted controls>
+    <button class="play-button" id="playButton">▶️</button>
+    <video id="video" controls>
         <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
         Seu navegador não suporta vídeos.
     </video>
+
+    <script>
+        const playButton = document.getElementById('playButton');
+        const video = document.getElementById('video');
+
+        // Exibe o vídeo e começa a reprodução ao clicar no botão
+        playButton.addEventListener('click', () => {
+            playButton.classList.add('hidden'); // Esconde o botão de play
+            video.style.display = 'block'; // Exibe o vídeo
+            video.play(); // Inicia a reprodução do vídeo
+        });
+
+        // Permite que o vídeo seja pausado
+        video.addEventListener('click', () => {
+            if (video.paused) {
+                video.play(); // Se o vídeo estiver pausado, ele começa a reproduzir
+            } else {
+                video.pause(); // Se o vídeo estiver tocando, ele será pausado
+            }
+        });
+    </script>
 </body>
 </html>
