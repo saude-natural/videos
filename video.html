@@ -58,6 +58,13 @@
     <script>
         const video = document.getElementById('videoPlayer');
 
+        // Tentar reproduzir o vídeo quando a página carregar
+        window.addEventListener('load', () => {
+            video.play().catch((error) => {
+                console.log('Autoplay falhou:', error);
+            });
+        });
+
         // Permitir pausar o vídeo ao clicar nele
         video.addEventListener('click', () => {
             if (video.paused) {
