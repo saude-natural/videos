@@ -66,10 +66,12 @@
             playButton.style.display = 'none'; // Esconde o botão
         }
 
-        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela
-        document.body.addEventListener('click', () => {
-            if (video.paused) {
-                startVideo(); // Se o vídeo estiver pausado, reinicia do zero com som
+        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela (incluindo o botão)
+        document.body.addEventListener('click', (event) => {
+            if (event.target !== playButton) { // Ignora o clique no próprio botão
+                if (video.paused) {
+                    startVideo(); // Se o vídeo estiver pausado, reinicia do zero com som
+                }
             }
         });
 
