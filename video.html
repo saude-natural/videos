@@ -58,11 +58,11 @@
     <script>
         const video = document.getElementById('videoPlayer');
 
-        // Ativar o áudio após 0,1s
-        window.addEventListener('load', () => {
+        // Espera o carregamento do vídeo e ativa o som após 0.1 segundos
+        video.addEventListener('play', () => {
             setTimeout(() => {
                 video.muted = false; // Ativa o áudio
-            }, 100); // 0,1s após o carregamento da página
+            }, 100); // 0.1 segundos após o play
         });
     </script>
 </body>
