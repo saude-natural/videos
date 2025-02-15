@@ -12,10 +12,13 @@
             justify-content: center; 
             align-items: center; 
             height: 100vh; 
+            overflow: hidden; /* Evita a rolagem da página */
         }
         video { 
-            width: 385px; 
-            height: 684px; 
+            width: 100%;  /* Faz o vídeo se ajustar à largura da tela */
+            max-width: 406px; /* Limita a largura do vídeo */
+            max-height: 720px; /* Limita a altura do vídeo */
+            height: auto; /* Mantém a proporção do vídeo */
         }
     </style>
 </head>
