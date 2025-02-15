@@ -45,27 +45,11 @@
         video::-webkit-media-controls-time-remaining-display {
             display: none !important;
         }
-
-        /* Estilo para o botão */
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 20px;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            border-radius: 10px;
-            z-index: 2;
-        }
     </style>
 </head>
 <body>
     <div class="video-container">
-        <video id="videoPlayer" loop controls>
+        <video id="videoPlayer" autoplay muted loop controls>
             <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
@@ -74,20 +58,11 @@
     <script>
         const video = document.getElementById('videoPlayer');
 
-        // Função para iniciar o vídeo após 1 segundo com áudio
+        // Ativar o áudio após 0,1s
         window.addEventListener('load', () => {
             setTimeout(() => {
-                video.play(); // Inicia o vídeo
-            }, 1000); // Aguarda 1 segundo para o autoplay
-        });
-
-        // Permitir pausar o vídeo ao clicar nele
-        video.addEventListener('click', () => {
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
-            }
+                video.muted = false; // Ativa o áudio
+            }, 100); // 0,1s após o carregamento da página
         });
     </script>
 </body>
