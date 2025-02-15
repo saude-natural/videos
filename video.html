@@ -14,9 +14,14 @@
             height: 100vh; 
             overflow: hidden; /* Evita a rolagem da página */
         }
+        .video-container {
+            position: relative;
+            width: 406px; /* Largura do vídeo */
+            height: 720px; /* Altura do vídeo */
+        }
         video { 
-            width: 406px;  /* Ajusta a largura do vídeo */
-            height: 720px; /* Ajusta a altura do vídeo */
+            width: 100%;  /* Ajusta a largura do vídeo */
+            height: 100%; /* Ajusta a altura do vídeo */
             background-color: white; /* Fundo do vídeo, caso não carregue */
             display: block;
         }
@@ -44,6 +49,9 @@
         /* Estilo do botão de play */
         .play-button {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
             border: none;
@@ -54,21 +62,14 @@
             z-index: 10;
         }
 
-        /* Garante que o botão de play fique no centro */
-        .play-button-container {
-            position: relative;
-            width: 406px;
-            height: 720px;
-        }
-
         /* Esconde o botão quando o vídeo está sendo reproduzido */
-        .play-button-container.playing .play-button {
+        .video-container.playing .play-button {
             display: none;
         }
     </style>
 </head>
 <body>
-    <div class="play-button-container">
+    <div class="video-container">
         <video id="videoPlayer" controls>
             <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
@@ -79,12 +80,12 @@
     <script>
         const playButton = document.getElementById('playButton');
         const video = document.getElementById('videoPlayer');
-        const playButtonContainer = document.querySelector('.play-button-container');
+        const videoContainer = document.querySelector('.video-container');
 
         // Quando o botão de play é clicado
         playButton.addEventListener('click', () => {
             video.play();
-            playButtonContainer.classList.add('playing'); // Remove o botão de play
+            videoContainer.classList.add('playing'); // Remove o botão de play
         });
 
         // Permitir pausar o vídeo ao clicar nele
