@@ -17,13 +17,43 @@
         video { 
             width: 100%;  /* Faz o vídeo se ajustar à largura da tela */
             max-width: 406px; /* Limita a largura do vídeo */
-            max-height: 720px; /* Limita a altura do vídeo */
+            max-height: 730px; /* Limita a altura do vídeo */
             height: auto; /* Mantém a proporção do vídeo */
+        }
+        
+        /* Esconde a barra de controle, o volume, a minutagem, etc. */
+        video::-webkit-media-controls { 
+            display: none !important; /* Esconde todos os controles de mídia */
+        }
+
+        /* Esconde a barra de progresso */
+        video::-webkit-media-controls-timeline {
+            display: none !important;
+        }
+
+        /* Esconde o botão de play/pause */
+        video::-webkit-media-controls-play-button {
+            display: none !important;
+        }
+
+        /* Esconde o controle de volume */
+        video::-webkit-media-controls-volume-slider {
+            display: none !important;
+        }
+
+        /* Esconde a opção de tela cheia */
+        video::-webkit-media-controls-fullscreen-button {
+            display: none !important;
+        }
+
+        /* Força o volume no máximo, ao carregar o vídeo */
+        video {
+            volume: 1 !important;
         }
     </style>
 </head>
 <body>
-    <video controls>
+    <video autoplay loop muted controls>
         <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
         Seu navegador não suporta vídeos.
     </video>
