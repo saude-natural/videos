@@ -15,40 +15,40 @@
             overflow: hidden; /* Evita a rolagem da página */
         }
         video { 
-            width: 100%;  /* Faz o vídeo se ajustar à largura da tela */
-            max-width: 406px; /* Limita a largura do vídeo */
-            max-height: 730px; /* Limita a altura do vídeo */
-            height: auto; /* Mantém a proporção do vídeo */
+            width: 406px;  /* Ajusta a largura do vídeo */
+            height: 730px; /* Ajusta a altura do vídeo */
+            background-color: black; /* Fundo do vídeo, caso não carregue */
         }
         
-        /* Esconde a barra de controle, o volume, a minutagem, etc. */
-        video::-webkit-media-controls { 
-            display: none !important; /* Esconde todos os controles de mídia */
+        /* Esconde todos os controles do vídeo */
+        video[controls] {
+            display: block;
+            pointer-events: none; /* Desabilita interação */
         }
-
-        /* Esconde a barra de progresso */
-        video::-webkit-media-controls-timeline {
-            display: none !important;
-        }
-
-        /* Esconde o botão de play/pause */
-        video::-webkit-media-controls-play-button {
-            display: none !important;
-        }
-
-        /* Esconde o controle de volume */
+        
+        /* Retira as funcionalidades de volume e fullscreen */
         video::-webkit-media-controls-volume-slider {
             display: none !important;
         }
 
-        /* Esconde a opção de tela cheia */
         video::-webkit-media-controls-fullscreen-button {
             display: none !important;
         }
 
-        /* Força o volume no máximo, ao carregar o vídeo */
-        video {
-            volume: 1 !important;
+        video::-webkit-media-controls-play-button {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-timeline {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-current-time-display {
+            display: none !important;
+        }
+
+        video::-webkit-media-controls-time-remaining-display {
+            display: none !important;
         }
     </style>
 </head>
