@@ -13,6 +13,7 @@
             align-items: center; 
             height: 100vh; 
             overflow: hidden; /* Evita a rolagem da página */
+            cursor: pointer; /* Aplica cursor de clique na tela inteira */
         }
         .video-container {
             position: relative;
@@ -26,7 +27,7 @@
             display: block;
         }
 
-        /* Botão de play no centro com fundo circular perfeito */
+        /* Botão de play centralizado com fundo circular perfeito */
         .play-button {
             position: absolute;
             top: 50%;
@@ -57,26 +58,28 @@
         const video = document.getElementById('videoPlayer');
         const playButton = document.getElementById('playButton');
 
-        // Função para dar play ou pause no vídeo
-        function togglePlayPause() {
+        // Função para iniciar o vídeo do zero e ativar o som
+        function startVideo() {
+            video.currentTime = 0; // Reinicia o vídeo
+            video.muted = false; // Ativa o som
+            video.play(); // Inicia o vídeo
+            playButton.style.display = 'none'; // Esconde o botão
+        }
+
+        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela
+        document.body.addEventListener('click', () => {
             if (video.paused) {
-                video.play(); // Inicia o vídeo
-                playButton.style.display = 'none'; // Esconde o botão de play
-            } else {
+                startVideo(); // Se o vídeo estiver pausado, reinicia do zero com som
+            }
+        });
+
+        // Para pausar o vídeo, clicar novamente na tela
+        video.addEventListener('click', () => {
+            if (!video.paused) {
                 video.pause(); // Pausa o vídeo
                 playButton.style.display = 'block'; // Exibe o botão de play
             }
-        }
-
-        // Ao clicar no botão, o vídeo reinicia, o som é ativado e o play começa
-        playButton.addEventListener('click', () => {
-            video.currentTime = 0; // Reinicia o vídeo
-            video.muted = false; // Ativa o som
-            togglePlayPause(); // Inicia o vídeo ou dá pause
         });
-
-        // A função também pode ser acionada por qualquer clique fora do botão
-        video.addEventListener('click', togglePlayPause);
     </script>
 </body>
 </html>
