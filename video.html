@@ -18,16 +18,20 @@
             width: 406px;  /* Ajusta a largura do vídeo */
             height: 720px; /* Ajusta a altura do vídeo */
             background-color: white; /* Fundo do vídeo, caso não carregue */
-            display: none; /* Esconde o vídeo até que o play seja clicado */
+            display: block;
         }
-        
+
         /* Esconde todos os controles do vídeo */
         video[controls] {
             display: block;
-            pointer-events: none; /* Desabilita interação */
         }
 
-        /* Esconde os controles do vídeo */
+        /* Esconde todos os controles extras do navegador */
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        /* Esconde os controles de volume e fullscreen */
         video::-webkit-media-controls-volume-slider,
         video::-webkit-media-controls-fullscreen-button,
         video::-webkit-media-controls-play-button,
@@ -45,40 +49,50 @@
             border: none;
             font-size: 30px;
             padding: 20px;
+            border-radius: 50%;
             cursor: pointer;
-            z-index: 1;
+            z-index: 10;
         }
 
-        /* Botão oculto após clicar no play */
-        .hidden {
+        /* Garante que o botão de play fique no centro */
+        .play-button-container {
+            position: relative;
+            width: 406px;
+            height: 720px;
+        }
+
+        /* Esconde o botão quando o vídeo está sendo reproduzido */
+        .play-button-container.playing .play-button {
             display: none;
         }
     </style>
 </head>
 <body>
-    <button class="play-button" id="playButton">▶️</button>
-    <video id="video" controls>
-        <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
-        Seu navegador não suporta vídeos.
-    </video>
+    <div class="play-button-container">
+        <video id="videoPlayer" controls>
+            <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <button class="play-button" id="playButton">▶️</button>
+    </div>
 
     <script>
         const playButton = document.getElementById('playButton');
-        const video = document.getElementById('video');
+        const video = document.getElementById('videoPlayer');
+        const playButtonContainer = document.querySelector('.play-button-container');
 
-        // Exibe o vídeo e começa a reprodução ao clicar no botão
+        // Quando o botão de play é clicado
         playButton.addEventListener('click', () => {
-            playButton.classList.add('hidden'); // Esconde o botão de play
-            video.style.display = 'block'; // Exibe o vídeo
-            video.play(); // Inicia a reprodução do vídeo
+            video.play();
+            playButtonContainer.classList.add('playing'); // Remove o botão de play
         });
 
-        // Permite que o vídeo seja pausado
+        // Permitir pausar o vídeo ao clicar nele
         video.addEventListener('click', () => {
             if (video.paused) {
-                video.play(); // Se o vídeo estiver pausado, ele começa a reproduzir
+                video.play();
             } else {
-                video.pause(); // Se o vídeo estiver tocando, ele será pausado
+                video.pause();
             }
         });
     </script>
