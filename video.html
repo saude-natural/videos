@@ -45,27 +45,6 @@
         video::-webkit-media-controls-time-remaining-display {
             display: none !important;
         }
-
-        /* Estilo do botão de play/pause */
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            font-size: 30px;
-            padding: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        /* Esconde o botão quando o vídeo está sendo reproduzido */
-        .video-container.playing .play-button {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -74,19 +53,10 @@
             <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
-        <button class="play-button" id="playButton">▶️</button>
     </div>
 
     <script>
-        const playButton = document.getElementById('playButton');
         const video = document.getElementById('videoPlayer');
-        const videoContainer = document.querySelector('.video-container');
-
-        // Quando o botão de play é clicado
-        playButton.addEventListener('click', () => {
-            video.play();
-            videoContainer.classList.add('playing'); // Remove o botão de play
-        });
 
         // Permitir pausar o vídeo ao clicar nele
         video.addEventListener('click', () => {
