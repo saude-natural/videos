@@ -69,24 +69,16 @@
             <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
-        <button id="playButton" class="play-button">Play</button>
     </div>
 
     <script>
         const video = document.getElementById('videoPlayer');
-        const playButton = document.getElementById('playButton');
 
-        // Função para iniciar o vídeo ao clicar no botão
-        playButton.addEventListener('click', () => {
-            video.play();
-            playButton.style.display = 'none'; // Esconde o botão depois que o vídeo começa
-        });
-
-        // Função para ativar autoplay após 1 segundo
+        // Função para iniciar o vídeo após 1 segundo com áudio
         window.addEventListener('load', () => {
             setTimeout(() => {
-                playButton.click(); // Aciona o botão de play automaticamente
-            }, 1000); // Aguarda 1 segundo
+                video.play(); // Inicia o vídeo
+            }, 1000); // Aguarda 1 segundo para o autoplay
         });
 
         // Permitir pausar o vídeo ao clicar nele
