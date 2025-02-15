@@ -44,7 +44,7 @@
 </head>
 <body>
     <div class="video-container">
-        <video id="videoPlayer" muted loop>
+        <video id="videoPlayer" autoplay muted loop>
             <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
@@ -55,13 +55,26 @@
         const video = document.getElementById('videoPlayer');
         const playButton = document.getElementById('playButton');
 
-        // Ao clicar no botão, o vídeo reinicia e o som é ativado
+        // Função para dar play ou pause no vídeo
+        function togglePlayPause() {
+            if (video.paused) {
+                video.play(); // Inicia o vídeo
+                playButton.style.display = 'none'; // Esconde o botão de play
+            } else {
+                video.pause(); // Pausa o vídeo
+                playButton.style.display = 'block'; // Exibe o botão de play
+            }
+        }
+
+        // Ao clicar no botão, o vídeo reinicia, o som é ativado e o play começa
         playButton.addEventListener('click', () => {
             video.currentTime = 0; // Reinicia o vídeo
-            video.play(); // Começa a reprodução
             video.muted = false; // Ativa o som
-            playButton.style.display = 'none'; // Esconde o botão de play
+            togglePlayPause(); // Inicia o vídeo ou dá pause
         });
+
+        // A função também pode ser acionada por qualquer clique fora do botão
+        video.addEventListener('click', togglePlayPause);
     </script>
 </body>
 </html>
