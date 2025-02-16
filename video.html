@@ -105,6 +105,16 @@
                 hasStarted = true; // Marca que o vídeo foi iniciado
             }
         });
+
+        // Ação ao clicar no botão de play
+        playButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que o clique no botão afete o clique no vídeo
+            if (video.paused) {
+                playVideo(); // Se o vídeo estiver pausado, despausa
+            } else {
+                pauseVideo(); // Se o vídeo estiver tocando, pausa
+            }
+        });
     </script>
 </body>
 </html>
