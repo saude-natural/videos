@@ -65,12 +65,6 @@
     </div>
 
     <script>
-        if (window.location.href.includes("t-cLDxGL")) {
-            videoContainer.style.display = "block"; // Exibe o vídeo se a URL contiver o código
-        } else {
-            document.body.innerHTML = "<h1>Acesso negado</h1>"; // Exibe mensagem se não tiver a string na URL
-        }
-
         const video = document.getElementById('videoPlayer');
         const playButton = document.getElementById('playButton');
         let hasStarted = false; // Variável para controlar se o vídeo já foi iniciado
