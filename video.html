@@ -32,7 +32,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) translate(5px, -5px);
+            transform: translate(-50%, -50%) translate(5px, -5px); /* Ajusta a posição */
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
             border: none;
@@ -43,6 +43,16 @@
             width: 70px;  /* Tamanho fixo do botão */
             height: 70px; /* Tamanho fixo do botão */
         }
+
+        /* Ajuste para o ícone de play (triângulo) no botão */
+        .play-button::before {
+            content: "▶"; /* Código do ícone do play */
+            position: absolute;
+            top: 50%;  /* Ajusta a posição vertical */
+            left: 50%; /* Ajusta a posição horizontal */
+            transform: translate(-50%, -50%) translate(3px, -3px); /* Movendo um pouco o ícone */
+            font-size: 30px;
+        }
     </style>
 </head>
 <body>
@@ -51,7 +61,7 @@
             <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
-        <button id="playButton" class="play-button">&#9658;</button> <!-- Ícone de Play -->
+        <button id="playButton" class="play-button"></button> <!-- Ícone de Play -->
     </div>
 
     <script>
@@ -73,7 +83,7 @@
             playButton.style.display = 'block'; // Exibe o botão de play
         }
 
-        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela
+        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela (exceto no vídeo)
         document.body.addEventListener('click', () => {
             if (!hasStarted) {  // Verifica se o vídeo já foi iniciado
                 startVideo(); // Se não, inicia o vídeo do zero com som
@@ -81,15 +91,16 @@
             } else if (video.paused) {
                 video.play(); // Se o vídeo estiver pausado, apenas continua
                 playButton.style.display = 'none'; // Esconde o botão
-            } else {
-                pauseVideo(); // Se o vídeo estiver tocando, pausa
             }
         });
 
-        // Para pausar o vídeo, clicar no vídeo (se não estiver pausado)
+        // Para pausar e despausar o vídeo ao clicar diretamente no vídeo
         video.addEventListener('click', () => {
             if (!video.paused) {
                 pauseVideo(); // Pausa o vídeo ao clicar no vídeo
+            } else {
+                video.play(); // Despausa o vídeo se ele estiver pausado
+                playButton.style.display = 'none'; // Esconde o botão
             }
         });
     </script>
