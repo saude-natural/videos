@@ -65,6 +65,15 @@
     </div>
 
     <script>
+        const trechoURL = "t-cLDxGL"; // Parte da URL permitida
+
+        if (!window.location.href.includes(trechoURL)) {
+            const videoContainer = document.querySelector(".video-container");
+            if (videoContainer) {
+                videoContainer.style.display = "none"; // Esconde o vídeo
+            }
+        }
+
         const video = document.getElementById('videoPlayer');
         const playButton = document.getElementById('playButton');
         let hasStarted = false; // Variável para controlar se o vídeo já foi iniciado
