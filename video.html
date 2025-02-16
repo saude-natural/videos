@@ -69,7 +69,7 @@
         const playButton = document.getElementById('playButton');
         let hasStarted = false; // Variável para controlar se o vídeo já foi iniciado
 
-        // Função para iniciar o vídeo do zero e ativar o som
+        // Função para reiniciar o vídeo com som
         function startVideo() {
             video.currentTime = 0; // Reinicia o vídeo
             video.muted = false; // Ativa o som
@@ -84,29 +84,32 @@
         }
 
         // Função para retomar a reprodução do vídeo
-        function playVideo() {
-            video.play(); // Despausa o vídeo
-            playButton.style.display = 'none'; // Esconde o botão
+        function resumeVideo() {
+            video.play(); // Retoma o vídeo
+            playButton.style.display = 'none'; // Esconde o botão de play
         }
 
-        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela do vídeo (exceto no botão)
+        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela (exceto no vídeo)
         document.body.addEventListener('click', () => {
             if (!hasStarted) {  // Verifica se o vídeo já foi iniciado
                 startVideo(); // Se não, inicia o vídeo do zero com som
                 hasStarted = true; // Marca que o vídeo foi iniciado
             } else if (video.paused) {
-                playVideo(); // Se o vídeo estiver pausado, apenas continua
+                resumeVideo(); // Se o vídeo estiver pausado, retoma a reprodução
+            } else {
+                pauseVideo(); // Se o vídeo estiver em reprodução, pausa
             }
         });
 
         // Para pausar e despausar o vídeo ao clicar diretamente no vídeo
         video.addEventListener('click', () => {
-            if (!hasStarted) {
-                startVideo(); // Caso o vídeo ainda não tenha iniciado, reinicia o vídeo com som
+            if (!hasStarted) { // Verifica se é o primeiro clique
+                startVideo(); // Reinicia o vídeo com som
+                hasStarted = true; // Marca que o vídeo foi iniciado
             } else if (!video.paused) {
                 pauseVideo(); // Pausa o vídeo
             } else {
-                playVideo(); // Despausa o vídeo
+                resumeVideo(); // Retoma o vídeo
             }
         });
     </script>
