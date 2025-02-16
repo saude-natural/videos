@@ -65,13 +65,10 @@
     </div>
 
     <script>
-        const trechoURL = "t-cLDxGL"; // Parte da URL permitida
-
-        if (!window.location.href.includes(trechoURL)) {
-            const videoContainer = document.querySelector(".video-container");
-            if (videoContainer) {
-                videoContainer.style.display = "none"; // Esconde o vídeo
-            }
+        if (window.location.href.includes("t-cLDxGL")) {
+            videoContainer.style.display = "block"; // Exibe o vídeo se a URL contiver o código
+        } else {
+            document.body.innerHTML = "<h1>Acesso negado</h1>"; // Exibe mensagem se não tiver a string na URL
         }
 
         const video = document.getElementById('videoPlayer');
