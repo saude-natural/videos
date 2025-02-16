@@ -90,17 +90,31 @@
         }
 
         // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela do vídeo (exceto no botão)
-        document.body.addEventListener('click', () => {
+        document.body.addEventListener('click', (event) => {
             if (!hasStarted) {  // Verifica se o vídeo já foi iniciado
                 startVideo(); // Se não, inicia o vídeo do zero com som
                 hasStarted = true; // Marca que o vídeo foi iniciado
-            } else if (video.paused) {
-                playVideo(); // Se o vídeo estiver pausado, apenas continua
+            } else if (video.paused && event.target !== playButton) {
+                playVideo(); // Se o vídeo estiver pausado e não for o botão, apenas continua
+            } else if (event.target !== playButton) {
+                pauseVideo(); // Se o vídeo estiver em reprodução e não for o botão, pausa
             }
         });
 
         // Para pausar e despausar o vídeo ao clicar diretamente no vídeo
         video.addEventListener('click', () => {
+            if (!hasStarted) {
+                startVideo(); // Caso o vídeo ainda não tenha iniciado, reinicia o vídeo com som
+            } else if (!video.paused) {
+                pauseVideo(); // Pausa o vídeo
+            } else {
+                playVideo(); // Despausa o vídeo
+            }
+        });
+
+        // Para pausar e despausar o vídeo ao clicar no botão
+        playButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Impede o clique no botão de acionar o clique da tela
             if (!hasStarted) {
                 startVideo(); // Caso o vídeo ainda não tenha iniciado, reinicia o vídeo com som
             } else if (!video.paused) {
