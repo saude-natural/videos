@@ -83,8 +83,8 @@
             playButton.style.display = 'block'; // Exibe o botão de play
         }
 
-        // Dispara a função de iniciar o vídeo ao clicar no botão de play
-        playButton.addEventListener('click', () => {
+        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela (exceto no vídeo)
+        document.body.addEventListener('click', () => {
             if (!hasStarted) {  // Verifica se o vídeo já foi iniciado
                 startVideo(); // Se não, inicia o vídeo do zero com som
                 hasStarted = true; // Marca que o vídeo foi iniciado
