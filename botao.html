@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão com Delay</title>
+    <style>
+        #botaoVerde {
+            display: none; /* Inicialmente oculto */
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #botaoVerde:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <button id="botaoVerde">Clique aqui!</button>
+
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('botaoVerde').style.display = 'block';
+            }, 40000); // 40 segundos
+        };
+    </script>
+</body>
+</html>
