@@ -12,9 +12,9 @@
             justify-content: center; 
             align-items: center; 
             height: 100vh; 
-            overflow: hidden; /* Evita a rolagem da página */
-            cursor: pointer; /* Aplica cursor de clique na tela inteira */
-            flex-direction: column; /* Organiza os elementos em coluna */
+            overflow: hidden;
+            cursor: pointer;
+            flex-direction: column;
         }
         .container {
             display: flex;
@@ -23,17 +23,15 @@
         }
         .video-container {
             position: relative;
-            width: 324.8px; /* Largura ajustada */
-            height: 576px; /* Altura ajustada */
+            width: 324.8px;
+            height: 576px;
         }
         video { 
-            width: 100%;  /* Ajusta a largura do vídeo */
-            height: 576px; /* Mantém a altura do vídeo */
-            background-color: white; /* Fundo do vídeo, caso não carregue */
+            width: 100%;
+            height: 576px;
+            background-color: white;
             display: block;
         }
-
-        /* Botão de play centralizado com fundo circular perfeito */
         .play-button {
             position: absolute;
             top: 50%;
@@ -43,24 +41,20 @@
             color: white;
             border: none;
             padding: 20px;
-            border-radius: 50%; /* Faz o botão ficar redondo */
+            border-radius: 50%;
             font-size: 30px;
             cursor: pointer;
-            width: 70px;  /* Tamanho fixo do botão */
-            height: 70px; /* Tamanho fixo do botão */
+            width: 70px;
+            height: 70px;
         }
-
-        /* Ajuste para o ícone de play (triângulo) no botão */
         .play-button::before {
-            content: "▶"; /* Código do ícone do play */
+            content: "▶";
             position: absolute;
-            top: 50%;  /* Ajusta a posição vertical */
-            left: 50%; /* Ajusta a posição horizontal */
-            transform: translate(-50%, -50%) translate(2px, -2px); /* Movendo um pouco o ícone */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translate(2px, -2px);
             font-size: 30px;
         }
-
-        /* Botão de ação */
         .action-button {
             display: none;
             background-color: #619f10;
@@ -71,8 +65,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 15px; /* Pequeno espaço entre o vídeo e o botão */
-            width: 350px; /* Mesmo tamanho do vídeo */
+            margin-top: 15px;
+            width: 324.8px;
             text-align: center;
         }
     </style>
@@ -84,71 +78,63 @@
                 <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste2.mp4" type="video/mp4">
                 Seu navegador não suporta vídeos.
             </video>
-            <button id="playButton" class="play-button"></button> <!-- Ícone de Play -->
+            <button id="playButton" class="play-button"></button>
         </div>
         <button id="actionButton" class="action-button" onclick="window.location.href='https://pay.kirvano.com/f57eb829-a0e8-4eeb-8876-d90d716a79bf'">PEGAR MEU PLANO</button>
     </div>
-
     <script>
         const video = document.getElementById('videoPlayer');
         const playButton = document.getElementById('playButton');
         const actionButton = document.getElementById('actionButton');
-        let hasStarted = false; // Variável para controlar se o vídeo já foi iniciado
+        let hasStarted = false;
 
-        // Função para iniciar o vídeo do zero e ativar o som
         function startVideo() {
-            video.currentTime = 0; // Reinicia o vídeo
-            video.muted = false; // Ativa o som
-            video.play(); // Inicia o vídeo
-            playButton.style.display = 'none'; // Esconde o botão
+            video.currentTime = 0;
+            video.muted = false;
+            video.play();
+            playButton.style.display = 'none';
         }
 
-        // Função para pausar o vídeo
         function pauseVideo() {
-            video.pause(); // Pausa o vídeo
-            playButton.style.display = 'block'; // Exibe o botão de play
+            video.pause();
+            playButton.style.display = 'block';
         }
 
-        // Função para retomar a reprodução do vídeo
         function playVideo() {
-            video.play(); // Despausa o vídeo
-            playButton.style.display = 'none'; // Esconde o botão
+            video.play();
+            playButton.style.display = 'none';
         }
 
-        // Dispara a função de iniciar o vídeo ao clicar no vídeo ou no botão
         video.addEventListener('click', () => {
             if (!hasStarted) {
-                startVideo(); // Caso o vídeo ainda não tenha iniciado, reinicia o vídeo com som
+                startVideo();
             } else if (!video.paused) {
-                pauseVideo(); // Pausa o vídeo
+                pauseVideo();
             } else {
-                playVideo(); // Despausa o vídeo
+                playVideo();
             }
         });
 
-        // Para pausar e despausar o vídeo ao clicar no botão
         playButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Impede o clique no botão de acionar o clique da tela
+            event.stopPropagation();
             if (!hasStarted) {
-                startVideo(); // Caso o vídeo ainda não tenha iniciado, reinicia o vídeo com som
+                startVideo();
             } else if (!video.paused) {
-                pauseVideo(); // Pausa o vídeo
+                pauseVideo();
             } else {
-                playVideo(); // Despausa o vídeo
+                playVideo();
             }
         });
 
-        // Dispara a função de iniciar o vídeo ao clicar em qualquer lugar da tela do vídeo (exceto no botão)
         document.body.addEventListener('click', (event) => {
-            if (!hasStarted) {  // Verifica se o vídeo já foi iniciado
-                startVideo(); // Se não, inicia o vídeo do zero com som
-                hasStarted = true; // Marca que o vídeo foi iniciado
+            if (!hasStarted) {
+                startVideo();
+                hasStarted = true;
             }
         });
 
-        // Exibir o botão após 1min25s de vídeo
         video.addEventListener('timeupdate', () => {
-            if (video.currentTime >= 85) { // 85 segundos = 1min25s
+            if (video.currentTime >= 85) {
                 actionButton.style.display = 'block';
             }
         });
