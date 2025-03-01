@@ -5,34 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vídeo</title>
     <style>
-        body {
-            margin: 0;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            overflow: hidden;
-            cursor: pointer;
+        body { 
+            margin: 0; 
+            background: white; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            overflow: hidden; 
+            cursor: pointer; 
+            flex-direction: column; 
         }
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
         }
         .video-container {
+            position: relative;
             width: 324.8px;
             height: 576px;
-            position: relative;
         }
-        video {
+        video { 
             width: 100%;
-            height: 100%;
+            height: 576px;
             background-color: white;
             display: block;
         }
+
         .play-button {
             position: absolute;
             top: 50%;
@@ -48,6 +48,7 @@
             width: 70px;
             height: 70px;
         }
+
         .play-button::before {
             content: "▶";
             position: absolute;
@@ -56,8 +57,8 @@
             transform: translate(-50%, -50%) translate(2px, -2px);
             font-size: 30px;
         }
+
         .action-button {
-            display: none;
             background-color: #619f10;
             color: white;
             font-family: "Nunito", sans-serif;
@@ -69,6 +70,7 @@
             margin-top: 15px;
             width: 350px;
             text-align: center;
+            visibility: hidden; /* Mantém o espaço reservado, mas invisível */
         }
     </style>
 </head>
@@ -83,6 +85,7 @@
         </div>
         <button id="actionButton" class="action-button" onclick="window.location.href='https://pay.kirvano.com/f57eb829-a0e8-4eeb-8876-d90d716a79bf'">PEGAR MEU PLANO</button>
     </div>
+
     <script>
         const video = document.getElementById('videoPlayer');
         const playButton = document.getElementById('playButton');
@@ -136,7 +139,7 @@
 
         video.addEventListener('timeupdate', () => {
             if (video.currentTime >= 85) {
-                actionButton.style.display = 'block';
+                actionButton.style.visibility = 'visible';
             }
         });
     </script>
