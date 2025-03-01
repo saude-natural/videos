@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeo</title>
+    <style>
+        body { 
+            margin: 0; 
+            background: white; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            overflow: hidden; 
+            cursor: pointer;
+        }
+        .video-container {
+            position: relative;
+            width: 324.8px;
+            height: 576px;
+        }
+        video { 
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: block;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            width: 70px;
+            height: 70px;
+        }
+        .play-button::before {
+            content: "▶";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translate(2px, -2px);
+            font-size: 30px;
+        }
+        /* Botão de compra */
+        .buy-button {
+            display: none;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #ff0000;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video id="videoPlayer" autoplay muted loop>
+            <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste2.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <button id="playButton" class="play-button"></button>
+    </div>
+    
+    <a id="buyButton" class="buy-button" href="https://pay.kirvano.com/f57eb829-a0e8-4eeb-8876-d90d716a79bf" target="_blank">PEGAR MEU PLANO</a>
+    
+    <script>
+        const video = document.getElementById('videoPlayer');
+        const playButton = document.getElementById('playButton');
+        const buyButton = document.getElementById('buyButton');
+        let hasStarted = false;
+
+        function startVideo() {
+            video.currentTime = 0;
+            video.muted = false;
+            video.play();
+            playButton.style.display = 'none';
+        }
+        function pauseVideo() {
+            video.pause();
+            playButton.style.display = 'block';
+        }
+        function playVideo() {
+            video.play();
+            playButton.style.display = 'none';
+        }
+
+        video.addEventListener('click', () => {
+            if (!hasStarted) {
+                startVideo();
+            } else if (!video.paused) {
+                pauseVideo();
+            } else {
+                playVideo();
+            }
+        });
+
+        playButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (!hasStarted) {
+                startVideo();
+            } else if (!video.paused) {
+                pauseVideo();
+            } else {
+                playVideo();
+            }
+        });
+
+        document.body.addEventListener('click', (event) => {
+            if (!hasStarted) {
+                startVideo();
+                hasStarted = true;
+            }
+        });
+
+        video.addEventListener('timeupdate', () => {
+            if (video.currentTime >= 85) { // Exibir o botão após 1m25s
+                buyButton.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
