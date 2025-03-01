@@ -50,7 +50,7 @@
         }
 
         .play-button::before {
-            content: "▶";
+            content: "\25B6";
             position: absolute;
             top: 50%;
             left: 50%;
@@ -91,12 +91,14 @@
         const playButton = document.getElementById('playButton');
         const actionButton = document.getElementById('actionButton');
         let hasStarted = false;
+        let soundActivated = false;
 
         function startVideo() {
             video.currentTime = 0;
             video.muted = false;
             video.play();
             playButton.style.display = 'none';
+            soundActivated = true;
         }
 
         function pauseVideo() {
@@ -112,6 +114,7 @@
         video.addEventListener('click', () => {
             if (!hasStarted) {
                 startVideo();
+                hasStarted = true;
             } else if (!video.paused) {
                 pauseVideo();
             } else {
@@ -123,6 +126,7 @@
             event.stopPropagation();
             if (!hasStarted) {
                 startVideo();
+                hasStarted = true;
             } else if (!video.paused) {
                 pauseVideo();
             } else {
@@ -138,7 +142,7 @@
         });
 
         video.addEventListener('timeupdate', () => {
-            if (video.currentTime >= 85) {
+            if (video.currentTime >= 85 && soundActivated) {
                 actionButton.style.visibility = 'visible';
             }
         });
