@@ -16,6 +16,11 @@
             cursor: pointer; /* Aplica cursor de clique na tela inteira */
             flex-direction: column; /* Organiza os elementos em coluna */
         }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .video-container {
             position: relative;
             width: 324.8px; /* Largura ajustada */
@@ -66,21 +71,23 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            width: 85%;
+            margin-top: 8px; /* Pequeno espaço entre o vídeo e o botão */
+            width: 324.8px; /* Mesmo tamanho do vídeo */
             text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="video-container">
-        <video id="videoPlayer" autoplay muted loop>
-            <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste2.mp4" type="video/mp4">
-            Seu navegador não suporta vídeos.
-        </video>
-        <button id="playButton" class="play-button"></button> <!-- Ícone de Play -->
+    <div class="container">
+        <div class="video-container">
+            <video id="videoPlayer" autoplay muted loop>
+                <source src="https://github.com/saude-natural/videos/raw/refs/heads/main/Teste2.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos.
+            </video>
+            <button id="playButton" class="play-button"></button> <!-- Ícone de Play -->
+        </div>
+        <button id="actionButton" class="action-button" onclick="window.location.href='https://pay.kirvano.com/f57eb829-a0e8-4eeb-8876-d90d716a79bf'">PEGAR MEU PLANO</button>
     </div>
-    <button id="actionButton" class="action-button" onclick="window.location.href='https://pay.kirvano.com/f57eb829-a0e8-4eeb-8876-d90d716a79bf'">PEGAR MEU PLANO</button>
 
     <script>
         const video = document.getElementById('videoPlayer');
